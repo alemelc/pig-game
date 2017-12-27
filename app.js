@@ -55,6 +55,7 @@ function nextPlayer() {
 	activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
 	roundScore = 0;
 	checkSix=[];
+	checkArray =[];
 
 	document.querySelector('.dice-0').style.display = 'none';
 	document.querySelector('.dice-1').style.display = 'none';
@@ -81,17 +82,24 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 			var dice1 = Math.floor(Math.random() * 6) + 1 ;
 			checkArray.push(dice1);
 
-			console.log (checkArray);
-
-			var dices = dice0+dice1;	
-
 			if (dice0===6) {
 				checkSix.push(dice0);
 			}
 
-			if (dice1===6) {
+			if (dice1 === 6) {
 				checkSix.push(dice1);
 			}
+
+			console.log (checkArray);
+			console.log(checkSix);
+
+			var dices = dice0+dice1;	
+
+			
+
+			//if (dice1===6) {
+			//	checkSix.push(dice1);
+			//}
 
 			// 2. Display the result
 			var dice0DOM = document.querySelector('.dice-0');
@@ -103,12 +111,12 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 			dice1DOM.src = 'dice-'+dice1+'.png';
 
 			// 3. Update the result if the result of the dice is not 1
-			if (dice0===1 || dice1 ===1) {
+			if (checkSix.length===2) {			//
+				scores[activePlayer] = 0;
+				document.querySelector('#score-'+activePlayer).textContent='0';
 				nextPlayer();
 			
-			} else if (checkSix.length===2) {	
-				scores[activePlayer] = 0;
-				//checkSix=[];
+			} else if (dice0===1 || dice1 ===1) {	//
 				nextPlayer();
 
 
